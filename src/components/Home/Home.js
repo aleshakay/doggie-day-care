@@ -1,7 +1,8 @@
 import React from 'react';
 import DogPen from '../DogPen/DogPen';
-import dogData from '../../helpers/data/dogsData';
+import dogsData from '../../helpers/data/dogsData';
 import employeeData from '../../helpers/data/employeesData';
+import authData from '../../helpers/data/authData';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.scss';
@@ -14,10 +15,25 @@ class Home extends React.Component {
     employees: [],
   }
 
+  getDogs = () => {
+    dogsData.getDogsByUid(authData.getUid())
+      .then((dogs) => {
+        this.setState({ dogs });
+      })
+      .catch((errFromDogsContainer) => console.error({ errFromDogsContainer }));
+  }
+
+  getEmployees = () => {
+    employeeData.getEmployeesByUid(authData.getUid())
+      .then((employees) => {
+        this.setState({ employees });
+      })
+      .catch((errFromDogsContainer) => console.error({ errFromDogsContainer }));
+  }
+
   componentDidMount() {
-    const dogs = dogData.getAllDogs();
-    const employees = employeeData.getAllEmployees();
-    this.setState({ dogs, employees });
+    this.getDogs();
+    this.getEmployees();
   }
 
   render() {

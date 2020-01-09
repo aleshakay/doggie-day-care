@@ -1,30 +1,36 @@
-const employees = [
-  {
-    id: 'employee1',
-    firstName: 'Gabriel',
-    lastName: 'Bowers',
-    phoneNumber: 9017361211,
-  },
-  {
-    id: 'employee2',
-    firstName: 'Yonette',
-    lastName: 'West',
-    phoneNumber: 7313130099,
-  },
-  {
-    id: 'employee3',
-    firstName: 'Edward',
-    lastName: 'Minor',
-    phoneNumber: 7313130089,
-  },
-  {
-    id: 'employee4',
-    firstName: 'Adrienne',
-    lastName: 'Lyles',
-    phoneNumber: 6154330099,
-  },
-];
+import axios from 'axios';
+import apiKeys from '../apiKeys.json';
 
-const getAllEmployees = () => employees;
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
-export default { getAllEmployees };
+const getEmployeesByUid = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/employees.json`)
+    .then((result) => {
+      const allEmployeesObj = result.data;
+      const employees = [];
+      if (allEmployeesObj != null) {
+        Object.keys(allEmployeesObj).forEach((employeeId) => {
+          const newEmployee = allEmployeesObj[employeeId];
+          newEmployee.id = employeeId;
+          employees.push(newEmployee);
+        });
+      }
+      resolve(employees);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+const getSingleEmployee = (employeeId) => axios.get(`${baseUrl}/employees/${employeeId}.json`);
+
+const saveEmployee = (employeeInfo) => axios.post(`${baseUrl}/employees.json`, employeeInfo);
+
+const updateEmployee = (employeeId, newEmployeesInfo) => axios.put(`${baseUrl}/employees/${employeeId}.json`, newEmployeesInfo);
+
+export default {
+  getEmployeesByUid,
+  getSingleEmployee,
+  saveEmployee,
+  updateEmployee,
+};

@@ -31,6 +31,16 @@ class Home extends React.Component {
       .catch((errFromDogsContainer) => console.error({ errFromDogsContainer }));
   }
 
+  addDog = (newDog) => {
+    dogsData.saveDog(newDog)
+      .then(() => {
+        this.getDogs();
+        this.setState({ showDogForm: false });
+      })
+      .catch((errorFromSaveBoard) => console.error({ errorFromSaveBoard }));
+  }
+
+
   componentDidMount() {
     this.getDogs();
     this.getEmployees();

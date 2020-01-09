@@ -17,6 +17,7 @@ class DogPen extends React.Component {
     return (
       <div className="DogPen">
         <h2>Doggies</h2>
+        <button className="btn btn-danger">Add Doggie</button>
         {dogCards}
       </div>
     );

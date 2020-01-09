@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardText, CardBody,
+  Card, CardText, CardBody, Button,
   CardTitle, CardSubtitle,
 } from 'reactstrap';
 import './Dog.scss';
@@ -21,7 +21,9 @@ class Dog extends React.Component {
             <CardSubtitle>Owner {dog.owner}</CardSubtitle>
             <CardText>{dog.description}</CardText>
             <img width="25%" src={dog.imageURl} alt="doggie" />
-        </CardBody>
+            <div><Button variant="primary">Edit {dog.name}</Button></div>
+            <div><Button variant="success">Delete</Button></div>
+            </CardBody>
       </Card>
     </div>
     );

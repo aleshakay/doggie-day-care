@@ -18,7 +18,7 @@ class Dog extends React.Component {
         <Card>
           <CardBody>
             <CardTitle>{dog.name}</CardTitle>
-            <CardSubtitle>{dog.owner}</CardSubtitle>
+            <CardSubtitle>Owner {dog.owner}</CardSubtitle>
             <CardText>{dog.description}</CardText>
             <img width="25%" src={dog.imageURl} alt="doggie" />
         </CardBody>

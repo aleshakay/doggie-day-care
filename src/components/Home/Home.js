@@ -3,7 +3,8 @@ import DogPen from '../DogPen/DogPen';
 import dogsData from '../../helpers/data/dogsData';
 import employeeData from '../../helpers/data/employeesData';
 import authData from '../../helpers/data/authData';
-
+import walksData from '../../helpers/data/walksData';
+import WalkForm from '../WalkForm/WalkForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.scss';
 import StaffRoom from '../StaffRoom/StaffRoom';
@@ -13,6 +14,7 @@ class Home extends React.Component {
   state = {
     dogs: [],
     employees: [],
+    walks: [],
   }
 
   getDogs = () => {
@@ -28,22 +30,21 @@ class Home extends React.Component {
       .then((employees) => {
         this.setState({ employees });
       })
-      .catch((errFromDogsContainer) => console.error({ errFromDogsContainer }));
+      .catch((errFromEmployeeContainer) => console.error({ errFromEmployeeContainer }));
   }
 
-  addDog = (newDog) => {
-    dogsData.saveDog(newDog)
-      .then(() => {
-        this.getDogs();
-        this.setState({ showDogForm: false });
+  getWalks = () => {
+    walksData.getWalksById(authData.getUid())
+      .then((walks) => {
+        this.setState({ walks });
       })
-      .catch((errorFromSaveBoard) => console.error({ errorFromSaveBoard }));
+      .catch((errFromWalkContainer) => console.error({ errFromWalkContainer }));
   }
-
 
   componentDidMount() {
     this.getDogs();
     this.getEmployees();
+    this.getWalks();
   }
 
   render() {
@@ -52,6 +53,7 @@ class Home extends React.Component {
         <div className="col-6 d-flex">
         <DogPen dogs={this.state.dogs} />
         <StaffRoom employees={this.state.employees} />
+        <WalkForm walks={this.state.walks} />
         </div>
       </div>
     );

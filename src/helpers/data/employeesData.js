@@ -22,15 +22,6 @@ const getEmployeesByUid = (uid) => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleEmployee = (employeeId) => axios.get(`${baseUrl}/employees/${employeeId}.json`);
-
-const saveEmployee = (employeeInfo) => axios.post(`${baseUrl}/employees.json`, employeeInfo);
-
-const updateEmployee = (employeeId, newEmployeesInfo) => axios.put(`${baseUrl}/employees/${employeeId}.json`, newEmployeesInfo);
-
 export default {
   getEmployeesByUid,
-  getSingleEmployee,
-  saveEmployee,
-  updateEmployee,
 };

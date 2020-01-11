@@ -17,7 +17,6 @@ class StaffRoom extends React.Component {
     return (
       <div className="StaffRoom">
         <h2>StaffRoom</h2>
-        <button className="btn btn-danger">Add Staff Member</button>
         {staffCards}
       </div>
     );

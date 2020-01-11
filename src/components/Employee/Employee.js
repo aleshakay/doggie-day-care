@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardBody, Button,
+  Card, CardBody,
   CardTitle, CardText,
 } from 'reactstrap';
 import employeeShape from '../../helpers/propz/employeeShape';
@@ -21,8 +21,6 @@ class Employee extends React.Component {
           <CardBody>
             <CardTitle>{employee.firstName} {employee.lastName}</CardTitle>
             <CardText>{employee.phoneNumber}</CardText>
-            <div><Button variant="primary">Edit {employee.id}</Button></div>
-            <div><Button variant="success">Delete</Button></div>
           </CardBody>
         </Card>
       </div>
